@@ -1,20 +1,12 @@
 # docs: https://kafka.apache.org/documentation/#quickstart_createtopic
-# create topic: https://kafka.apache.org/documentation/#quickstart_createtopic
-# create event:  bin/kafka-console-producer.sh --topic quickstart-events --bootstrap-server localhost:9092
-# read event: bin/kafka-console-consumer.sh --topic quickstart-events --from-beginning --bootstrap-server localhost:9092
 version: '2'
 services:
-  zk:
-    build: .
-    command: ["bash","-c","cd /kafka/kafka_2.13-2.7.0; bin/zookeeper-server-start.sh config/zookeeper.properties"]
-    ports:
-      - "2181:2181"
-    environment:
-      - JAVA_OPTS=-Xms256m -Xmx512m
   kafka:
+    hostname: ${HOSTIP}
     build: .
-    command: ["bash","-c","cd /kafka/kafka_2.13-2.7.0; bin/kafka-server-start.sh config/server.properties "]
+    command: ["bash","-c","bin/zookeeper-server-start.sh -daemon config/zookeeper.properties && bin/kafka-server-start.sh config/server.properties "]
     ports:
       - "9092:9092"
+      - "2181:2181"
     environment:
       - JAVA_OPTS=-Xms256m -Xmx512m
