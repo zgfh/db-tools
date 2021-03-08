@@ -11,6 +11,9 @@ docker build -t java:8 .
 ```
 2. 安装
 ```
+#清理
+docker-compose down -v
+
 # 把192.168.1.7替换为你的机器ip
 docker-compose up -d -e HOSTIP=192.168.1.7
 ```
@@ -32,3 +35,16 @@ bin/kafka-console-producer.sh --topic quickstart-events --bootstrap-server local
 bin/kafka-console-consumer.sh --topic quickstart-events --from-beginning --bootstrap-server localhost:9092
 
 ```
+
+也可以用(以主机ip是192.168.1.7为例)
+```
+KAFKA_IP="192.168.1.7"
+docker run -it kafka_kafka --create --topic test --bootstrap-server $KAFKA_IP:9092
+docker run -it kafka_kafka bin/kafka-console-producer.sh --topic test --bootstrap-server $KAFKA_IP:9092
+
+docker run -it kafka_kafka bin/kafka-console-consumer.sh --topic test --from-beginning --bootstrap-server $KAFKA_IP:9092
+```
+
+
+
+https://github.com/wurstmeister/kafka-docker/issues/389

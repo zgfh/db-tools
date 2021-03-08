@@ -2,9 +2,9 @@
 version: '2'
 services:
   kafka:
-    hostname: ${HOSTIP}
+    hostname: ${HOSTIP-127.0.0.1}
     build: .
-    command: ["bash","-c","bin/zookeeper-server-start.sh -daemon config/zookeeper.properties && bin/kafka-server-start.sh config/server.properties "]
+    command: ["bash","-c","bin/zookeeper-server-start.sh -daemon config/zookeeper.properties ; while true ;do curl 127.0.0.1:2181 2>&1 |grep 'Empty reply from server' && break ; sleep 1 ;done ; bin/kafka-server-start.sh config/server.properties "]
     ports:
       - "9092:9092"
       - "2181:2181"
