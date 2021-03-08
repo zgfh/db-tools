@@ -1,0 +1,9 @@
+elasticsearch:
+  image: elasticsearch:7.3.2
+  ports: 
+   - 9200:9200 
+   - 9300:9300
+   
+  environment:
+    - discovery.type=single-node
+    - JAVA_OPTS=-Xms256m -Xmx512m
