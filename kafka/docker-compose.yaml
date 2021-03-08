@@ -1,5 +1,5 @@
 # docs: https://kafka.apache.org/documentation/#quickstart_createtopic
-version: '2'
+version: '3.4'
 services:
   kafka:
     hostname: ${HOSTIP-127.0.0.1}

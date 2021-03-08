@@ -15,7 +15,7 @@ docker build -t java:8 .
 docker-compose down -v
 
 # 把192.168.1.7替换为你的机器ip
-docker-compose up -d -e HOSTIP=192.168.1.7
+export HOSTIP=192.168.1.7 ;docker-compose up -d
 ```
 
 
